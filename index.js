@@ -52,22 +52,31 @@ class myHashTable{
   _hash(key){
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
-      hash = (hash + key.charCodeAt(i) * i) % size;
+      hash = (hash + key.charCodeAt(i) * i) % this.data.length;
     }
     return hash;
   }
   //Sets a key and value
   set(key, value){
-    this.address = this._hash(key);
-    if(!this.data[this.address]){
-      this.data[this.address] = [];
+    let address = this._hash(key);
+    if(!this.data[address]){
+      this.data[address] = [];
     }
-    this.data[this.address] = [key,value];
-    return;
+    this.data[address].push([key,value]);
+    return this.data;
   }
   //Gets the value at the given key
   get(key){
-    
+    let address = this._hash(key);
+    let currentAddress = this.data[address];
+    if(this.data[address]){
+      for (let i = 0; i < currentAddress.length; i++){
+        if(currentAddress[i][0] === key){
+          return currentAddress[i][1];
+        }
+      }
+    }
+    return undefined;
   }
   //Returns an array of all the hash table contents, o(n^2), could try to improve this later
   keys(){
@@ -78,7 +87,15 @@ class myHashTable{
 
 function testMyHashTable(){
   let testHash = new myHashTable(10);
-  console.log(testHash);
+  //Testing the setting of key and value pair
+  testHash.set('Log',10);
+  testHash.set('Slumber',12);
+  testHash.set('Dragon', 50);
+  console.log(testHash);        //Expected, 3 Data points
+  //Testing the get functionality
+  console.log(testHash.get('Slumber'));
+  console.log(testHash.get('Slumbo')); //Expected, 12, undefined
+  //Testing the keys functionality   
 }
 
 function testMyArray() {
@@ -86,7 +103,7 @@ function testMyArray() {
   //Testing the push function
   testArray.push('First');
   testArray.push('Second');
-  console.log(testArray); //Expected, Length: 2, data {First, Second}
+  console.log(testArray);       //Expected, Length: 2, data {First, Second}
   //Testing the pop function
   testArray.pop();
   testArray.push('Third');
