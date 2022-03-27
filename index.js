@@ -80,11 +80,119 @@ class myHashTable{
   }
   //Returns an array of all the hash table contents, o(n^2), could try to improve this later
   keys(){
-    
+    const keyArray = [];
+    for (let i = 0; i <this.data.length;i++){
+      if (this.data[i]){
+        for (let j = 0; j< this.data[i].length;j++){
+          keyArray.push(this.data[i][j][0]);
+        }
+      }
+    }
+    return keyArray;
   }
   
 }
 
+class myLinkedList{
+  constructor(value){
+    this.head = {
+      value: value,
+      next: null
+    }
+    this.tail = this.head;
+    this.length = 1;
+  }
+  //This function adds to the linked list at the end
+  append(value){
+    const newNode = {
+      value: value,
+      next: null
+    }
+    this.tail.next = newNode;    //Note for me, This changes current next to newNode
+    this.tail = newNode;         //Then moves the tail forward in the list
+    this.length++;
+    return this;
+  }
+  //This function adds to the beginning of a linked list
+  prepend(value){
+    const newNode = {
+      value: value,
+      next: null
+    }
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+  //insertion into a linked list
+  insert(index, value){
+    //checking to make sure it's a valid index
+    if (index > this.length){
+      return undefined;
+    }
+    let currentNode = this.head;
+    let previousNode = this.head;
+    for (let i =1; i!==index;i++){
+      previousNode = previousNode.next;
+    } 
+    for (let i =1; i!==index+1;i++){
+      currentNode = currentNode.next;
+    } 
+    const newNode = {
+      value: value,
+      next: null
+    }
+    previousNode.next = newNode;
+    newNode.next = currentNode;
+    this.length++;
+    return this;
+  }
+  //Prints out the linked list as an array
+  remove(index){
+    if (index > this.length){
+      return undefined;
+    }
+    let nextNode = this.head;
+    let previousNode = this.head;
+    for(let i = 1;i<index+1;i++){
+      nextNode = nextNode.next;
+    }
+    for (let i = 1; i < index;i++){
+      previousNode = previousNode.next;
+    }
+    //let deletionNode = previousNode.next;
+    previousNode.next = nextNode.next;
+    this.length--;
+    return this;
+  }
+  printList(){
+    const array = [];
+    let currentNode = this.head;
+    while(currentNode !== null){
+      array.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+    return array;
+  }
+}
+
+function testMyLinkedList() {
+  const linkedList = new myLinkedList(50);
+  //Testing the append function
+  linkedList.append(5);
+  linkedList.append(200);
+  console.log(linkedList.printList()); // Expected 50,5,200
+  //Testing the prepend function
+  linkedList.prepend(125);
+  linkedList.prepend(700);
+  console.log(linkedList.printList()); // Expected 700,125,50,5,200
+  //Testing the insert function
+  linkedList.insert(2,245);
+  console.log(linkedList.printList()); // Expected 700,125,245,50,5,200
+  //Testing the remove function
+  linkedList.remove(2);
+  console.log(linkedList.printList())  // Expected 700,125,50,5,200
+}
 function testMyHashTable(){
   let testHash = new myHashTable(10);
   //Testing the setting of key and value pair
@@ -96,8 +204,8 @@ function testMyHashTable(){
   console.log(testHash.get('Slumber'));
   console.log(testHash.get('Slumbo')); //Expected, 12, undefined
   //Testing the keys functionality   
+  console.log(testHash.keys());  //Expected ['Slumber', 'Dragon', 'Log']
 }
-
 function testMyArray() {
   let testArray = new myArray();
   //Testing the push function
@@ -113,5 +221,6 @@ function testMyArray() {
   testArray.delete(1);
   console.log(testArray);       //Expected, Length: 2, data {First, Final}
 }
-
-testMyHashTable();
+//testMyArray();
+//testMyHashTable();
+//testMyLinkedList();
