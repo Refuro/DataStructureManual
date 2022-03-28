@@ -1,5 +1,15 @@
 //Christian Spencer, 3/26/22
 
+
+//This is to be used by my BinarySearchTree implementation
+class treeNode {
+  constructor(value){
+    this.left = null;
+    this.right = null;
+    this.value = value;
+  }
+}
+
 //My array implementation, since Javascript does not support overloading the constructor, I haven't allowed a delcaration with parameters yet, but plan to figure out a solution when I have more time
 class myArray{
   constructor(){
@@ -41,7 +51,6 @@ class myArray{
     return;
   }
 }
-
 
 //My hashtable implementation, I'm not using my own array class here because I have not yet implemented size declaration, but plan to switch it after I implement that
 class myHashTable{
@@ -93,6 +102,7 @@ class myHashTable{
   
 }
 
+//My LinkedList implementation, it's only a singly linked list right now. I'll probably create a second class for doubly-linked list
 class myLinkedList{
   constructor(value){
     this.head = {
@@ -160,7 +170,6 @@ class myLinkedList{
     for (let i = 1; i < index;i++){
       previousNode = previousNode.next;
     }
-    //let deletionNode = previousNode.next;
     previousNode.next = nextNode.next;
     this.length--;
     return this;
@@ -176,6 +185,55 @@ class myLinkedList{
   }
 }
 
+class myBinarySearchTree{
+  constructor(){
+    this.root = null;    
+  }
+  insert(value){
+    let newNode = new treeNode(value);
+    //initialize the root of the tree
+    if(this.root === null){
+      this.root = newNode;
+      return;
+    } else {
+      let currentNode = this.root;
+      
+      while (true) {
+        if (value < currentNode.value){
+          //left
+          if(!currentNode.left){
+            currentNode.left = newNode;
+            return this;
+          } else {
+            currentNode = currentNode.left
+          }
+        } else if (value > currentNode.value){
+          //right
+          if(!currentNode.right){
+            currentNode.right = newNode;
+            return this;
+          } else {
+            currentNode = currentNode.right
+          }          
+        }
+      }
+    } 
+  }
+  lookup(value){
+
+    
+  }
+}
+
+//Test Functions  
+function testMyBinarySearchTree(){
+  const tree = new BinarySearchTree();
+  tree.insert(40);
+  tree.insert(30);
+  tree.insert(50);
+  tree.insert(39);
+  console.log(tree);
+}
 function testMyLinkedList() {
   const linkedList = new myLinkedList(50);
   //Testing the append function
@@ -224,3 +282,4 @@ function testMyArray() {
 //testMyArray();
 //testMyHashTable();
 //testMyLinkedList();
+testMyBinarySearchTree();
