@@ -184,7 +184,7 @@ class myLinkedList{
     return array;
   }
 }
-
+//My first attempt at a binarysearchtree, I still need to work on the remove function, which is a bit more complex here
 class myBinarySearchTree{
   constructor(){
     this.root = null;    
@@ -220,19 +220,41 @@ class myBinarySearchTree{
     } 
   }
   lookup(value){
-
-    
-  }
+    if(this.root === null){
+      return false
+    }
+    let currentNode = this.root;
+    while (currentNode) {
+      if (value < currentNode.value){
+        currentNode = currentNode.left;
+      }
+      else if (value > currentNode.value){
+        currentNode = currentNode.right;
+      }
+      else if(currentNode.value === value){
+          return currentNode;
+        }
+      }          
+    return false;  
+  }    
 }
-
+//Used to traverse the BST
+function traverse(node) {
+  const tree = { value: node.value };
+  tree.left = node.left === null ? null : traverse(node.left);
+  tree.right = node.right === null ? null : traverse(node.right);
+  return tree;
+}
 //Test Functions  
 function testMyBinarySearchTree(){
-  const tree = new BinarySearchTree();
+  const tree = new myBinarySearchTree();
   tree.insert(40);
   tree.insert(30);
   tree.insert(50);
   tree.insert(39);
-  console.log(tree);
+  tree.insert(34);
+  console.log(JSON.stringify(traverse(tree.root)))
+  console.log(tree.lookup(39));
 }
 function testMyLinkedList() {
   const linkedList = new myLinkedList(50);
@@ -282,4 +304,4 @@ function testMyArray() {
 //testMyArray();
 //testMyHashTable();
 //testMyLinkedList();
-testMyBinarySearchTree();
+//testMyBinarySearchTree();
