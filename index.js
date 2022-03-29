@@ -13,8 +13,8 @@ class treeNode {
 
 
 
-
-
+//Data Structures
+{
 //My array implementation, since Javascript does not support overloading the constructor, I haven't allowed a delcaration with parameters yet, but plan to figure out a solution when I have more time
 class myArray{
   constructor(){
@@ -253,7 +253,7 @@ class myBinarySearchTree{
     return false;  
   }    
 }
-
+}
 
 
 
@@ -266,9 +266,8 @@ function traverse(node) {
 }
 
 
-
-
-//Test Functions  
+//Test Functions
+{
 function testMyBinarySearchTree(){
   const tree = new myBinarySearchTree();
   tree.insert(40);
@@ -328,12 +327,13 @@ function testMyArray() {
 //testMyHashTable();
 //testMyLinkedList();
 //testMyBinarySearchTree();
-
-
-
+}
+  
+//Recursive Practice
+{
 //Practice on recursion down here, this is just becoming a large practice program
 // use with findFactorial Recursive 
-//total = 0;
+//total = 1;
 //count = 0;
 function findFactorialRecursive(num){
   if (num === 1){
@@ -348,4 +348,7 @@ function findFactorialRecursive(num){
   num--;
   return findFactorialRecursive(num);
 }
-console.log(findFactorialRecursive(7));
+//console.log(findFactorialRecursive(7));
+}
+
+console.log(1+2);
