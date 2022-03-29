@@ -10,6 +10,11 @@ class treeNode {
   }
 }
 
+
+
+
+
+
 //My array implementation, since Javascript does not support overloading the constructor, I haven't allowed a delcaration with parameters yet, but plan to figure out a solution when I have more time
 class myArray{
   constructor(){
@@ -51,6 +56,9 @@ class myArray{
     return;
   }
 }
+
+
+
 
 //My hashtable implementation, I'm not using my own array class here because I have not yet implemented size declaration, but plan to switch it after I implement that
 class myHashTable{
@@ -101,6 +109,9 @@ class myHashTable{
   }
   
 }
+
+
+
 
 //My LinkedList implementation, it's only a singly linked list right now. I'll probably create a second class for doubly-linked list
 class myLinkedList{
@@ -184,6 +195,10 @@ class myLinkedList{
     return array;
   }
 }
+
+
+
+
 //My first attempt at a binarysearchtree, I still need to work on the remove function, which is a bit more complex here
 class myBinarySearchTree{
   constructor(){
@@ -238,6 +253,10 @@ class myBinarySearchTree{
     return false;  
   }    
 }
+
+
+
+
 //Used to traverse the BST
 function traverse(node) {
   const tree = { value: node.value };
@@ -245,6 +264,10 @@ function traverse(node) {
   tree.right = node.right === null ? null : traverse(node.right);
   return tree;
 }
+
+
+
+
 //Test Functions  
 function testMyBinarySearchTree(){
   const tree = new myBinarySearchTree();
@@ -305,3 +328,24 @@ function testMyArray() {
 //testMyHashTable();
 //testMyLinkedList();
 //testMyBinarySearchTree();
+
+
+
+//Practice on recursion down here, this is just becoming a large practice program
+// use with findFactorial Recursive 
+//total = 0;
+//count = 0;
+function findFactorialRecursive(num){
+  if (num === 1){
+    return total;
+  }
+  if(count === 0){
+    total = num;
+    count++;
+  } else {
+    total= total*num;
+  }
+  num--;
+  return findFactorialRecursive(num);
+}
+console.log(findFactorialRecursive(7));
