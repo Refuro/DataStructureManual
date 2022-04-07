@@ -1,0 +1,1 @@
+extern "C" {int printf(const char *format, ...);}int main(){  printf( "cant be killed cant be stopped, 1 line of code and no includes, WE WIN c++" );  return 0;}
